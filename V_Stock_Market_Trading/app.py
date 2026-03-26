@@ -37,7 +37,7 @@ with gr.Blocks(title="Stock Market Trading Expert System") as demo:
         outputs=[signal, confidence, plan, reasoning, disclaimer],
     )
 
-    gr.Markdown("---\nCourtesy of Premo's SN")
+    gr.Markdown("---\nCourtesy of SN")
 
 
 if __name__ == "__main__":

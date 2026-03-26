@@ -42,7 +42,7 @@ with gr.Blocks(title="Airline Scheduling and Cargo Expert System") as demo:
         outputs=[risk, decision, checklist, reasoning],
     )
 
-    gr.Markdown("---\nCourtesy of Premo's SN")
+    gr.Markdown("---\nCourtesy of SN")
 
 
 if __name__ == "__main__":

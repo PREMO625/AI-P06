@@ -45,7 +45,7 @@ with gr.Blocks(title="Employee Performance Evaluation Expert System") as demo:
         outputs=[score, rating, action, recommendations, reasoning],
     )
 
-    gr.Markdown("---\nCourtesy of Premo's SN")
+    gr.Markdown("---\nCourtesy of SN")
 
 
 if __name__ == "__main__":

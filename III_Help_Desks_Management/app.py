@@ -41,7 +41,7 @@ with gr.Blocks(title="Help Desk Management Expert System") as demo:
         outputs=[priority, team, sla, checklist, reasoning],
     )
 
-    gr.Markdown("---\nCourtesy of Premo's SN")
+    gr.Markdown("---\nCourtesy of SN")
 
 
 if __name__ == "__main__":

@@ -50,7 +50,7 @@ with gr.Blocks(title="Information Management Expert System") as demo:
         outputs=[classification, summary, actions, reasoning],
     )
 
-    gr.Markdown("---\nCourtesy of Premo's SN")
+    gr.Markdown("---\nCourtesy of SN")
 
 
 if __name__ == "__main__":

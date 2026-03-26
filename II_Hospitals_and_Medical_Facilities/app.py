@@ -46,7 +46,7 @@ with gr.Blocks(title="Hospital and Medical Facilities Expert System") as demo:
         outputs=[triage, diagnosis, care_plan, reasoning],
     )
 
-    gr.Markdown("---\nCourtesy of Premo's SN")
+    gr.Markdown("---\nCourtesy of SN")
 
 
 if __name__ == "__main__":
