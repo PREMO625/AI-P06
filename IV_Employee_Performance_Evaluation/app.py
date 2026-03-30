@@ -1,4 +1,5 @@
 import gradio as gr
+from fastapi import FastAPI
 
 from backend import EmployeePerformanceExpertSystem
 
@@ -46,6 +47,10 @@ with gr.Blocks(title="Employee Performance Evaluation Expert System") as demo:
     )
 
     gr.Markdown("---\nCourtesy of SN")
+
+
+fastapi_app = FastAPI(title="Employee Performance Evaluation Expert System")
+app = gr.mount_gradio_app(fastapi_app, demo, path="/")
 
 
 if __name__ == "__main__":

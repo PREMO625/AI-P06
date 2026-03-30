@@ -1,4 +1,5 @@
 import gradio as gr
+from fastapi import FastAPI
 
 from backend import InformationManagementExpertSystem
 
@@ -51,6 +52,10 @@ with gr.Blocks(title="Information Management Expert System") as demo:
     )
 
     gr.Markdown("---\nCourtesy of SN")
+
+
+fastapi_app = FastAPI(title="Information Management Expert System")
+app = gr.mount_gradio_app(fastapi_app, demo, path="/")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
 import gradio as gr
+from fastapi import FastAPI
 
 from backend import AirlineSchedulingExpertSystem
 
@@ -43,6 +44,10 @@ with gr.Blocks(title="Airline Scheduling and Cargo Expert System") as demo:
     )
 
     gr.Markdown("---\nCourtesy of SN")
+
+
+fastapi_app = FastAPI(title="Airline Scheduling and Cargo Expert System")
+app = gr.mount_gradio_app(fastapi_app, demo, path="/")
 
 
 if __name__ == "__main__":

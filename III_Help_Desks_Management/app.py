@@ -1,4 +1,5 @@
 import gradio as gr
+from fastapi import FastAPI
 
 from backend import HelpDeskExpertSystem
 
@@ -42,6 +43,10 @@ with gr.Blocks(title="Help Desk Management Expert System") as demo:
     )
 
     gr.Markdown("---\nCourtesy of SN")
+
+
+fastapi_app = FastAPI(title="Help Desk Management Expert System")
+app = gr.mount_gradio_app(fastapi_app, demo, path="/")
 
 
 if __name__ == "__main__":

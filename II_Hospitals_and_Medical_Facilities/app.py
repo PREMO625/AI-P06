@@ -1,4 +1,5 @@
 import gradio as gr
+from fastapi import FastAPI
 
 from backend import HospitalExpertSystem
 
@@ -47,6 +48,10 @@ with gr.Blocks(title="Hospital and Medical Facilities Expert System") as demo:
     )
 
     gr.Markdown("---\nCourtesy of SN")
+
+
+fastapi_app = FastAPI(title="Hospital and Medical Facilities Expert System")
+app = gr.mount_gradio_app(fastapi_app, demo, path="/")
 
 
 if __name__ == "__main__":
