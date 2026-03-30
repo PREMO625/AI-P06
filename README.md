@@ -35,7 +35,9 @@ The suite demonstrates how expert systems can be used in practical decision-supp
 Each module has:
 
 - `backend.py`: the inference and rule engine
-- `app.py`: the interactive Gradio UI
+- `app.py`: the interactive Gradio UI (mounted on FastAPI)
+- `requirements.txt`: module dependencies
+- `vercel.json`: deployment configuration
 
 ## Tech Stack
 
@@ -52,22 +54,34 @@ AI P06/
 |-- README.md
 |-- I_Information_Management/
 |   |-- app.py
-|   `-- backend.py
+|   |-- backend.py
+|   |-- requirements.txt
+|   `-- vercel.json
 |-- II_Hospitals_and_Medical_Facilities/
 |   |-- app.py
-|   `-- backend.py
+|   |-- backend.py
+|   |-- requirements.txt
+|   `-- vercel.json
 |-- III_Help_Desks_Management/
 |   |-- app.py
-|   `-- backend.py
+|   |-- backend.py
+|   |-- requirements.txt
+|   `-- vercel.json
 |-- IV_Employee_Performance_Evaluation/
 |   |-- app.py
-|   `-- backend.py
+|   |-- backend.py
+|   |-- requirements.txt
+|   `-- vercel.json
 |-- V_Stock_Market_Trading/
 |   |-- app.py
-|   `-- backend.py
+|   |-- backend.py
+|   |-- requirements.txt
+|   `-- vercel.json
 `-- VI_Airline_Scheduling_and_Cargo_Schedules/
     |-- app.py
-    `-- backend.py
+    |-- backend.py
+    |-- requirements.txt
+    `-- vercel.json
 ```
 
 ## Setup and Installation
@@ -77,12 +91,15 @@ Run from project root:
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+pip install -r .\I_Information_Management\requirements.txt
 ```
 
-Installed dependency from `requirements.txt`:
+All module-level `requirements.txt` files currently include:
 
 - `gradio>=5.23.0`
+- `fastapi>=0.115.0`
+
+Note: the root `requirements.txt` currently contains only Gradio.
 
 ## How to Run
 
