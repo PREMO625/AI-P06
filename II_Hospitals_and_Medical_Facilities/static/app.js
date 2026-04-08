@@ -73,11 +73,34 @@ function markdownishToHtml(text) {
   return html;
 }
 
+function stripLeadingSectionHeading(text, expectedHeading) {
+  if (!text) return '';
+  const lines = text.split('\n');
+
+  while (lines.length > 0 && !lines[0].trim()) {
+    lines.shift();
+  }
+
+  if (lines.length > 0) {
+    const first = lines[0].trim().toLowerCase();
+    const target = `### ${expectedHeading}`.toLowerCase();
+    if (first === target) {
+      lines.shift();
+    }
+  }
+
+  return lines.join('\n').trim();
+}
+
 function setResults(result) {
   el.triage.textContent = result.triage;
-  el.diagnosis.innerHTML = markdownishToHtml(result.diagnosis);
-  el.carePlan.innerHTML = markdownishToHtml(result.care_plan);
-  el.reasoning.innerHTML = markdownishToHtml(result.reasoning);
+  const diagnosisText = stripLeadingSectionHeading(result.diagnosis, 'Most Probable Conditions');
+  const carePlanText = stripLeadingSectionHeading(result.care_plan, 'Recommended First Response');
+  const reasoningText = stripLeadingSectionHeading(result.reasoning, 'Inference Reasoning');
+
+  el.diagnosis.innerHTML = markdownishToHtml(diagnosisText);
+  el.carePlan.innerHTML = markdownishToHtml(carePlanText);
+  el.reasoning.innerHTML = markdownishToHtml(reasoningText);
 
   el.triage.classList.remove('updated');
   void el.triage.offsetWidth;
