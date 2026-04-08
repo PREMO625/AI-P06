@@ -612,58 +612,30 @@ footer.svelte-1ax1toq { display: none !important; }
 }
 
 /* Keep deterministic pre-animation state only while JS sets html.anim-pending */
+/* Pre-hide only structural containers to avoid half-faded controls on slower runtimes. */
 html.anim-pending #hero,
-html.anim-pending .hero-eyebrow,
-html.anim-pending .hero-title,
-html.anim-pending .hero-sub,
 html.anim-pending #layout-row,
 html.anim-pending #input-card,
 html.anim-pending #result-card,
-html.anim-pending #symptoms,
-html.anim-pending #age,
-html.anim-pending #pain_scale,
-html.anim-pending #duration,
-html.anim-pending #run_btn,
-html.anim-pending #clear_btn,
-html.anim-pending #triage,
-html.anim-pending #diagnosis,
-html.anim-pending #care_plan,
-html.anim-pending #reasoning,
 html.anim-pending #footer {
     opacity: 0;
-    transform: translate3d(0, 18px, 0);
-}
-
-html.anim-pending .hero-rule {
-    opacity: 0;
+    transform: translate3d(0, 14px, 0);
 }
 
 /* Hero - top-down reveal */
-html.anim-ready #hero         { animation: fadeSlideDown 0.6s  cubic-bezier(0.16,1,0.3,1) 0.05s both; }
-html.anim-ready .hero-eyebrow { animation: fadeSlideDown 0.5s  cubic-bezier(0.16,1,0.3,1) 0.20s both; }
-html.anim-ready .hero-title   { animation: fadeSlideDown 0.55s cubic-bezier(0.16,1,0.3,1) 0.32s both; }
-html.anim-ready .hero-rule    { animation: fadeIn        0.4s  ease                        0.46s both; }
-html.anim-ready .hero-sub     { animation: fadeSlideDown 0.5s  cubic-bezier(0.16,1,0.3,1) 0.54s both; }
+html.anim-ready #hero         { animation: fadeSlideDown 0.42s cubic-bezier(0.16,1,0.3,1) 0.00s both; }
+html.anim-ready .hero-eyebrow { animation: fadeSlideDown 0.34s cubic-bezier(0.16,1,0.3,1) 0.04s both; }
+html.anim-ready .hero-title   { animation: fadeSlideDown 0.36s cubic-bezier(0.16,1,0.3,1) 0.08s both; }
+html.anim-ready .hero-rule    { animation: fadeIn        0.28s ease                        0.12s both; }
+html.anim-ready .hero-sub     { animation: fadeSlideDown 0.34s cubic-bezier(0.16,1,0.3,1) 0.14s both; }
 
 /* Cards and fields */
-html.anim-ready #layout-row   { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 0.58s both; }
-html.anim-ready #input-card   { animation: fadeSlideUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.64s both; }
-html.anim-ready #result-card  { animation: fadeSlideUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.78s both; }
-
-html.anim-ready #symptoms     { animation: fadeSlideUp 0.5s  cubic-bezier(0.16,1,0.3,1) 0.90s both; }
-html.anim-ready #age          { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.00s both; }
-html.anim-ready #pain_scale   { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.08s both; }
-html.anim-ready #duration     { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.16s both; }
-html.anim-ready #run_btn      { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.24s both; }
-html.anim-ready #clear_btn    { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.30s both; }
-
-html.anim-ready #triage       { animation: fadeSlideUp 0.50s cubic-bezier(0.16,1,0.3,1) 0.92s both; }
-html.anim-ready #diagnosis    { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.02s both; }
-html.anim-ready #care_plan    { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.12s both; }
-html.anim-ready #reasoning    { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.22s both; }
+html.anim-ready #layout-row   { animation: fadeSlideUp 0.32s cubic-bezier(0.16,1,0.3,1) 0.12s both; }
+html.anim-ready #input-card   { animation: fadeSlideUp 0.36s cubic-bezier(0.16,1,0.3,1) 0.16s both; }
+html.anim-ready #result-card  { animation: fadeSlideUp 0.36s cubic-bezier(0.16,1,0.3,1) 0.22s both; }
 
 /* Footer */
-html.anim-ready #footer       { animation: fadeIn 0.5s ease 1.35s both; }
+html.anim-ready #footer       { animation: fadeIn 0.28s ease 0.30s both; }
 
 /* Result flash on each diagnosis run */
 @keyframes resultPop {
@@ -699,6 +671,19 @@ html.anim-ready #footer       { animation: fadeIn 0.5s ease 1.35s both; }
     padding: 30px 24px !important;
 }
 
+/* Force heading contrast so cards never appear washed out across runtimes */
+#input-card .card-eyebrow,
+#result-card .card-eyebrow {
+    opacity: 1 !important;
+    color: var(--green-400) !important;
+}
+
+#input-card .card-title,
+#result-card .card-title {
+    opacity: 1 !important;
+    color: var(--green-900) !important;
+}
+
 #run_btn button {
     background: linear-gradient(135deg, var(--green-900) 0%, var(--green-500) 100%) !important;
     color: #fff !important;
@@ -716,6 +701,11 @@ html.anim-ready #footer       { animation: fadeIn 0.5s ease 1.35s both; }
 #symptoms label,
 #duration label {
     border-radius: 999px !important;
+}
+
+#age input[type="range"],
+#pain_scale input[type="range"] {
+    accent-color: var(--green-500) !important;
 }
 
 #triage textarea {
