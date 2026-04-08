@@ -132,61 +132,6 @@ with gr.Blocks(
         For educational &amp; demonstration use only &nbsp;-&nbsp;
         Not a substitute for professional medical advice
     </div>
-
-    <script>
-    (function() {
-        const root = document.documentElement;
-        root.classList.add('anim-pending');
-
-        function startEntryAnimations() {
-            root.classList.remove('anim-pending');
-            if (root.classList.contains('anim-ready')) return;
-            root.classList.add('anim-ready');
-        }
-
-        async function bootstrapAnimations() {
-            try {
-                if (document.fonts && document.fonts.ready) {
-                    await document.fonts.ready;
-                }
-            } catch (e) {
-                // Ignore font readiness failures and continue with deterministic startup.
-            }
-
-            requestAnimationFrame(() => {
-                requestAnimationFrame(startEntryAnimations);
-            });
-
-            // Safety fallback so elements never stay in pre-animation state.
-            setTimeout(() => {
-                root.classList.remove('anim-pending');
-                startEntryAnimations();
-            }, 1200);
-        }
-
-        function flashResults() {
-            const targets = document.querySelectorAll('.triage-box, .out-block');
-            targets.forEach((el, i) => {
-                el.classList.remove('result-flash');
-                void el.offsetWidth;
-                el.style.animationDelay = (i * 0.13) + 's';
-                el.classList.add('result-flash');
-            });
-        }
-        function attachListener() {
-            const buttons = document.querySelectorAll('button');
-            buttons.forEach(btn => {
-                if (btn.textContent.trim().includes('Run Expert Diagnosis') && !btn._animListened) {
-                    btn._animListened = true;
-                    btn.addEventListener('click', () => setTimeout(flashResults, 650));
-                }
-            });
-        }
-        let tries = 0;
-        const iv = setInterval(() => { attachListener(); if (++tries > 20) clearInterval(iv); }, 400);
-        bootstrapAnimations();
-    })();
-    </script>
     """)
 
     diagnose_btn.click(

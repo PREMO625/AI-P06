@@ -584,67 +584,7 @@ footer.svelte-1ax1toq { display: none !important; }
     }
 }
 
-/* =============================================
-   SMOOTH GPU-ACCELERATED STAGGERED ANIMATIONS
-   ============================================= */
-
-@keyframes fadeSlideUp {
-    from { opacity: 0; transform: translate3d(0, 22px, 0); }
-    to   { opacity: 1; transform: translate3d(0, 0, 0);    }
-}
-@keyframes fadeSlideDown {
-    from { opacity: 0; transform: translate3d(0, -14px, 0); }
-    to   { opacity: 1; transform: translate3d(0, 0, 0);     }
-}
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-/* Prepare GPU layers upfront */
-#hero, .hero-eyebrow, .hero-title, .hero-rule, .hero-sub,
-#layout-row, #input-card, #result-card,
-#symptoms, #age, #pain_scale, #duration, #run_btn, #clear_btn,
-#triage, #diagnosis, #care_plan, #reasoning, #footer {
-    will-change: opacity, transform;
-    backface-visibility: hidden;
-}
-
-/* Keep deterministic pre-animation state only while JS sets html.anim-pending */
-/* Pre-hide only structural containers to avoid half-faded controls on slower runtimes. */
-html.anim-pending #hero,
-html.anim-pending #layout-row,
-html.anim-pending #input-card,
-html.anim-pending #result-card,
-html.anim-pending #footer {
-    opacity: 0;
-    transform: translate3d(0, 14px, 0);
-}
-
-/* Hero - top-down reveal */
-html.anim-ready #hero         { animation: fadeSlideDown 0.42s cubic-bezier(0.16,1,0.3,1) 0.00s both; }
-html.anim-ready .hero-eyebrow { animation: fadeSlideDown 0.34s cubic-bezier(0.16,1,0.3,1) 0.04s both; }
-html.anim-ready .hero-title   { animation: fadeSlideDown 0.36s cubic-bezier(0.16,1,0.3,1) 0.08s both; }
-html.anim-ready .hero-rule    { animation: fadeIn        0.28s ease                        0.12s both; }
-html.anim-ready .hero-sub     { animation: fadeSlideDown 0.34s cubic-bezier(0.16,1,0.3,1) 0.14s both; }
-
-/* Cards and fields */
-html.anim-ready #layout-row   { animation: fadeSlideUp 0.32s cubic-bezier(0.16,1,0.3,1) 0.12s both; }
-html.anim-ready #input-card   { animation: fadeSlideUp 0.36s cubic-bezier(0.16,1,0.3,1) 0.16s both; }
-html.anim-ready #result-card  { animation: fadeSlideUp 0.36s cubic-bezier(0.16,1,0.3,1) 0.22s both; }
-
-/* Footer */
-html.anim-ready #footer       { animation: fadeIn 0.28s ease 0.30s both; }
-
-/* Result flash on each diagnosis run */
-@keyframes resultPop {
-    0%   { opacity: 0; transform: translate3d(0, 18px, 0); }
-    100% { opacity: 1; transform: translate3d(0, 0, 0);    }
-}
-.result-flash {
-    animation: resultPop 0.45s cubic-bezier(0.16,1,0.3,1) both !important;
-    will-change: opacity, transform !important;
-}
+/* Animations intentionally disabled for deterministic first render on all environments. */
 
 /* =============================================
    STABLE ID-BASED FALLBACKS (GRADIO 5+ SAFE)
