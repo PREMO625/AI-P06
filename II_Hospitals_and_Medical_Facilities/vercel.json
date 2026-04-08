@@ -5,10 +5,7 @@
       "src": "app.py",
       "use": "@vercel/python",
       "config": {
-        "includeFiles": [
-          "style.css",
-          "II_Hospitals_and_Medical_Facilities/style.css"
-        ]
+        "includeFiles": ["style.css"]
       }
     }
   ],

@@ -1,5 +1,4 @@
 ﻿from pathlib import Path
-import os
 
 import gradio as gr
 from fastapi import FastAPI
@@ -11,34 +10,15 @@ def run_expert_system(symptoms, age, pain_scale, duration):
     result = engine.evaluate(set(symptoms), int(age), int(pain_scale), duration)
     return result["triage"], result["diagnosis"], result["care_plan"], result["reasoning"]
 
-print("==== DEBUG START ====")
-print("Current working dir:", os.getcwd())
-print("Files in cwd:", os.listdir())
-
-_candidate_css_paths = [
-    Path(__file__).with_name("style.css"),
-    Path.cwd() / "style.css",
-    Path.cwd() / "II_Hospitals_and_Medical_Facilities" / "style.css",
-]
-
-custom_css = ""
-_loaded_from = None
-
-for _css_file in _candidate_css_paths:
-    print("Checking CSS path:", _css_file)
-    print("Exists?:", _css_file.exists())
-    if _css_file.exists():
-        custom_css = _css_file.read_text(encoding="utf-8")
-        _loaded_from = _css_file
-        break
-
-if _loaded_from is not None:
-    print("CSS loaded from:", _loaded_from)
-    print("CSS loaded. Length:", len(custom_css))
+# Read CSS at module load time using __file__ (works on Vercel serverless)
+_css_file = Path(__file__).with_name("style.css")
+if _css_file.exists():
+    custom_css = _css_file.read_text(encoding="utf-8")
+    print(f"CSS loaded from: {_css_file} ({len(custom_css)} chars)")
 else:
-    print("CSS NOT FOUND")
-
-print("==== DEBUG END ====")
+    # Hard fallback: CSS could not be found at all
+    custom_css = ""
+    print("WARNING: style.css not found next to app.py")
 
 with gr.Blocks(
     title="Hospital & Medical Facilities Expert System",
