@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital & Medical Facilities Expert System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">Clinical Decision Support System</div>
+      <h1>Hospital & Medical Facilities<br>Expert System</h1>
+      <div class="hero-rule"></div>
+      <p>
+        A rule-based triage assistant for probable condition matching,
+        clinical assessment, and personalised care routing.
+      </p>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="card">
+      <p class="step">Step 01</p>
+      <h2>Patient Information</h2>
+      <div class="divider"></div>
+
+      <div class="input-group dark-panel">
+        <label>Observed Symptoms</label>
+        <p class="hint">Select all symptoms currently present.</p>
+        <div id="symptoms" class="chips"></div>
+
+        <div class="slider-row">
+          <label for="age">Patient Age <span id="ageValue">30</span></label>
+          <input id="age" type="range" min="1" max="100" value="30">
+        </div>
+
+        <div class="slider-row">
+          <label for="painScale">Pain Level (0 = None - 10 = Severe) <span id="painValue">3</span></label>
+          <input id="painScale" type="range" min="0" max="10" value="3">
+        </div>
+
+        <label>Duration of Symptoms</label>
+        <div id="durations" class="chips"></div>
+      </div>
+
+      <div class="actions">
+        <button id="runBtn" class="btn btn-primary">Run Expert Diagnosis</button>
+        <button id="clearBtn" class="btn btn-secondary">Clear All</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <p class="step">Step 02</p>
+      <h2>Clinical Results</h2>
+      <div class="divider"></div>
+
+      <div class="output-group dark-panel">
+        <label>Triage Level</label>
+        <div id="triage" class="triage">Run diagnosis to see triage classification</div>
+      </div>
+
+      <article class="output-box">
+        <h3>Most Probable Conditions</h3>
+        <div id="diagnosis" class="content"></div>
+      </article>
+
+      <article class="output-box">
+        <h3>Recommended Care Plan</h3>
+        <div id="carePlan" class="content"></div>
+      </article>
+
+      <article class="output-box">
+        <h3>Inference Reasoning</h3>
+        <div id="reasoning" class="content"></div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    Developed by <strong>SN</strong> - For educational & demonstration use only - Not a substitute for professional medical advice
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

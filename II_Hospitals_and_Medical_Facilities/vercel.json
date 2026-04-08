@@ -5,7 +5,7 @@
       "src": "api/index.py",
       "use": "@vercel/python",
       "config": {
-        "includeFiles": ["style.css", "backend.py"]
+        "includeFiles": ["static/**", "backend.py"]
       }
     }
   ],
