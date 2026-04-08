@@ -15,10 +15,12 @@ def run_expert_system(symptoms, age, pain_scale, duration):
 _css_file = Path(__file__).with_name("style.css")
 if _css_file.exists():
     custom_css = _css_file.read_text(encoding="utf-8")
+    css_source = str(_css_file)
     print(f"CSS loaded from: {_css_file} ({len(custom_css)} chars)")
 else:
     # Fallback to embedded CSS so serverless packaging cannot break styling.
     custom_css = CUSTOM_CSS
+    css_source = "embedded_css"
     print(f"WARNING: style.css not found next to app.py; using embedded CSS ({len(custom_css)} chars)")
 
 with gr.Blocks(
@@ -156,6 +158,17 @@ with gr.Blocks(
     )
 
 fastapi_app = FastAPI(title="Hospital and Medical Facilities Expert System")
+
+
+@fastapi_app.get("/__debug")
+def debug_css_status():
+    return {
+        "css_source": css_source,
+        "css_length": len(custom_css),
+        "contains_green_900": "--green-900" in custom_css,
+    }
+
+
 app = gr.mount_gradio_app(fastapi_app, demo, path="/")
 
 if __name__ == "__main__":
