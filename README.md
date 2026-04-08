@@ -1,12 +1,13 @@
 # AI P06 - Expert Systems Suite
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)
-![Gradio](https://img.shields.io/badge/UI-Gradio-FF4B4B?logo=gradio&logoColor=white)
+![UI](https://img.shields.io/badge/UI-Gradio%20%2B%20HTML%2FCSS%2FJS-FF4B4B)
 ![Paradigm](https://img.shields.io/badge/AI-Rule--Based%20Expert%20Systems-0EA5E9)
 ![Status](https://img.shields.io/badge/Status-Ready%20to%20Run-22C55E)
 ![License](https://img.shields.io/badge/License-Educational-lightgrey)
 
-This project contains six rule-based expert systems implemented in Python with Gradio interfaces.
+This project contains six rule-based expert systems implemented in Python.
+Five modules use Gradio interfaces, and the hospital module uses a pure FastAPI + static HTML/CSS/JS frontend.
 Each system captures domain knowledge as explicit logic and transforms user inputs into explainable recommendations.
 
 ## Table of Contents
@@ -35,14 +36,22 @@ The suite demonstrates how expert systems can be used in practical decision-supp
 Each module has:
 
 - `backend.py`: the inference and rule engine
-- `app.py`: the interactive Gradio UI (mounted on FastAPI)
+- `app.py`: runtime entrypoint (Gradio or FastAPI-static based on module)
 - `requirements.txt`: module dependencies
 - `vercel.json`: deployment configuration
+
+Hospital module specific frontend files:
+
+- `static/index.html`
+- `static/style.css`
+- `static/app.js`
+- `static/favicon.svg`
 
 ## Tech Stack
 
 - Python
-- Gradio
+- Gradio (modules I, III, IV, V, VI)
+- FastAPI + static HTML/CSS/JS (module II)
 - Rule-based logic using deterministic scoring and condition rules
 
 ## Project Structure
@@ -58,9 +67,16 @@ AI P06/
 |   |-- requirements.txt
 |   `-- vercel.json
 |-- II_Hospitals_and_Medical_Facilities/
+|   |-- api/
+|   |   `-- index.py
 |   |-- app.py
 |   |-- backend.py
 |   |-- requirements.txt
+|   |-- static/
+|   |   |-- app.js
+|   |   |-- favicon.svg
+|   |   |-- index.html
+|   |   `-- style.css
 |   `-- vercel.json
 |-- III_Help_Desks_Management/
 |   |-- app.py
@@ -94,10 +110,15 @@ python -m venv .venv
 pip install -r .\I_Information_Management\requirements.txt
 ```
 
-All module-level `requirements.txt` files currently include:
+Most module-level `requirements.txt` files include:
 
 - `gradio>=5.23.0`
 - `fastapi>=0.115.0`
+
+Hospital module (`II_Hospitals_and_Medical_Facilities`) uses:
+
+- `fastapi>=0.115.0`
+- `uvicorn>=0.29.0`
 
 Note: the root `requirements.txt` currently contains only Gradio.
 
@@ -126,8 +147,16 @@ python .\V_Stock_Market_Trading\app.py
 python .\VI_Airline_Scheduling_and_Cargo_Schedules\app.py
 ```
 
-After launch, Gradio prints a local URL (typically `http://127.0.0.1:7860`) in terminal.
-Open it in your browser and interact with the interface.
+For Gradio modules, Gradio prints a local URL (typically `http://127.0.0.1:7860`).
+
+For the hospital module (FastAPI + static frontend), run:
+
+```powershell
+cd .\II_Hospitals_and_Medical_Facilities
+uvicorn app:app --reload
+```
+
+Then open `http://127.0.0.1:8000`.
 
 ## Expert Systems Detailed Guide
 

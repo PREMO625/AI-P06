@@ -78,6 +78,18 @@ function setResults(result) {
   el.diagnosis.innerHTML = markdownishToHtml(result.diagnosis);
   el.carePlan.innerHTML = markdownishToHtml(result.care_plan);
   el.reasoning.innerHTML = markdownishToHtml(result.reasoning);
+
+  el.triage.classList.remove('updated');
+  void el.triage.offsetWidth;
+  el.triage.classList.add('updated');
+
+  [el.diagnosis, el.carePlan, el.reasoning].forEach((node) => {
+    const box = node.closest('.output-box');
+    if (!box) return;
+    box.classList.remove('new-result');
+    void box.offsetWidth;
+    box.classList.add('new-result');
+  });
 }
 
 function renderChips(container, values, onToggle, isActiveFn) {

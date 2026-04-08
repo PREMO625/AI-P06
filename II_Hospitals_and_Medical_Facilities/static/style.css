@@ -24,11 +24,25 @@ body {
 .hero {
   background: linear-gradient(160deg, var(--green-900) 0%, var(--green-700) 55%, var(--green-500) 100%);
   padding: 56px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 70% at 95% 0%, rgba(184, 147, 74, 0.16) 0%, transparent 62%),
+    radial-gradient(ellipse 30% 45% at 8% 105%, rgba(255, 255, 255, 0.05) 0%, transparent 55%);
 }
 
 .hero-inner {
   max-width: 1120px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-badge {
@@ -81,6 +95,12 @@ body {
   border-radius: 18px;
   padding: 24px 22px;
   box-shadow: 0 6px 18px rgba(15, 45, 34, 0.08);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(15, 45, 34, 0.12);
 }
 
 .step {
@@ -144,12 +164,17 @@ body {
   font-size: 14px;
   cursor: pointer;
   user-select: none;
+  transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
 }
 
 .chip.active {
   border-color: var(--green-500);
   background: #234a3c;
   color: #fff;
+}
+
+.chip:hover {
+  transform: translateY(-1px);
 }
 
 .slider-row {
@@ -181,17 +206,28 @@ input[type="range"] {
   font-weight: 600;
   border: 1px solid var(--gray-200);
   cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.22s ease, background 0.18s ease;
 }
 
 .btn-primary {
   border: none;
   color: #fff;
   background: linear-gradient(135deg, var(--green-900) 0%, var(--green-500) 100%);
+  box-shadow: 0 8px 22px rgba(15, 45, 34, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(15, 45, 34, 0.26);
 }
 
 .btn-secondary {
   background: #fff;
   color: #37524a;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-1px);
 }
 
 .triage {
@@ -215,6 +251,24 @@ input[type="range"] {
   padding: 14px 16px;
   margin-top: 12px;
   background: #fff;
+}
+
+.output-box.new-result {
+  animation: softPop 0.28s ease-out;
+}
+
+.triage.updated {
+  animation: triageFlash 0.36s ease-out;
+}
+
+@keyframes softPop {
+  0% { transform: translateY(6px); opacity: 0.78; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes triageFlash {
+  0% { box-shadow: 0 0 0 0 rgba(46, 144, 112, 0.35); }
+  100% { box-shadow: 0 0 0 12px rgba(46, 144, 112, 0); }
 }
 
 .output-box h3 {
