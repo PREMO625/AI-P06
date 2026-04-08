@@ -610,30 +610,30 @@ footer.svelte-1ax1toq { display: none !important; }
     backface-visibility: hidden;
 }
 
-/* Keep deterministic pre-animation state until JS marks html.anim-ready */
-html:not(.anim-ready) #hero,
-html:not(.anim-ready) .hero-eyebrow,
-html:not(.anim-ready) .hero-title,
-html:not(.anim-ready) .hero-sub,
-html:not(.anim-ready) #layout-row,
-html:not(.anim-ready) #input-card,
-html:not(.anim-ready) #result-card,
-html:not(.anim-ready) #symptoms,
-html:not(.anim-ready) #age,
-html:not(.anim-ready) #pain_scale,
-html:not(.anim-ready) #duration,
-html:not(.anim-ready) #run_btn,
-html:not(.anim-ready) #clear_btn,
-html:not(.anim-ready) #triage,
-html:not(.anim-ready) #diagnosis,
-html:not(.anim-ready) #care_plan,
-html:not(.anim-ready) #reasoning,
-html:not(.anim-ready) #footer {
+/* Keep deterministic pre-animation state only while JS sets html.anim-pending */
+html.anim-pending #hero,
+html.anim-pending .hero-eyebrow,
+html.anim-pending .hero-title,
+html.anim-pending .hero-sub,
+html.anim-pending #layout-row,
+html.anim-pending #input-card,
+html.anim-pending #result-card,
+html.anim-pending #symptoms,
+html.anim-pending #age,
+html.anim-pending #pain_scale,
+html.anim-pending #duration,
+html.anim-pending #run_btn,
+html.anim-pending #clear_btn,
+html.anim-pending #triage,
+html.anim-pending #diagnosis,
+html.anim-pending #care_plan,
+html.anim-pending #reasoning,
+html.anim-pending #footer {
     opacity: 0;
     transform: translate3d(0, 18px, 0);
 }
 
-html:not(.anim-ready) .hero-rule {
+html.anim-pending .hero-rule {
     opacity: 0;
 }
 

@@ -135,8 +135,11 @@ with gr.Blocks(
 
     <script>
     (function() {
+        const root = document.documentElement;
+        root.classList.add('anim-pending');
+
         function startEntryAnimations() {
-            const root = document.documentElement;
+            root.classList.remove('anim-pending');
             if (root.classList.contains('anim-ready')) return;
             root.classList.add('anim-ready');
         }
@@ -155,7 +158,10 @@ with gr.Blocks(
             });
 
             // Safety fallback so elements never stay in pre-animation state.
-            setTimeout(startEntryAnimations, 1200);
+            setTimeout(() => {
+                root.classList.remove('anim-pending');
+                startEntryAnimations();
+            }, 1200);
         }
 
         function flashResults() {
