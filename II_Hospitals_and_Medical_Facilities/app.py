@@ -135,6 +135,29 @@ with gr.Blocks(
 
     <script>
     (function() {
+        function startEntryAnimations() {
+            const root = document.documentElement;
+            if (root.classList.contains('anim-ready')) return;
+            root.classList.add('anim-ready');
+        }
+
+        async function bootstrapAnimations() {
+            try {
+                if (document.fonts && document.fonts.ready) {
+                    await document.fonts.ready;
+                }
+            } catch (e) {
+                // Ignore font readiness failures and continue with deterministic startup.
+            }
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(startEntryAnimations);
+            });
+
+            // Safety fallback so elements never stay in pre-animation state.
+            setTimeout(startEntryAnimations, 1200);
+        }
+
         function flashResults() {
             const targets = document.querySelectorAll('.triage-box, .out-block');
             targets.forEach((el, i) => {
@@ -155,6 +178,7 @@ with gr.Blocks(
         }
         let tries = 0;
         const iv = setInterval(() => { attachListener(); if (++tries > 20) clearInterval(iv); }, 400);
+        bootstrapAnimations();
     })();
     </script>
     """)

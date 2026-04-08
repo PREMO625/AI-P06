@@ -602,39 +602,67 @@ footer.svelte-1ax1toq { display: none !important; }
 }
 
 /* Prepare GPU layers upfront */
-.hero, .hero-eyebrow, .hero-title, .hero-rule, .hero-sub,
-.equal-cols > div,
-.gradio-checkboxgroup, .gradio-slider, .gradio-radio,
-button.lg, .triage-box, .out-block, .footer {
+#hero, .hero-eyebrow, .hero-title, .hero-rule, .hero-sub,
+#layout-row, #input-card, #result-card,
+#symptoms, #age, #pain_scale, #duration, #run_btn, #clear_btn,
+#triage, #diagnosis, #care_plan, #reasoning, #footer {
     will-change: opacity, transform;
     backface-visibility: hidden;
 }
 
+/* Keep deterministic pre-animation state until JS marks html.anim-ready */
+html:not(.anim-ready) #hero,
+html:not(.anim-ready) .hero-eyebrow,
+html:not(.anim-ready) .hero-title,
+html:not(.anim-ready) .hero-sub,
+html:not(.anim-ready) #layout-row,
+html:not(.anim-ready) #input-card,
+html:not(.anim-ready) #result-card,
+html:not(.anim-ready) #symptoms,
+html:not(.anim-ready) #age,
+html:not(.anim-ready) #pain_scale,
+html:not(.anim-ready) #duration,
+html:not(.anim-ready) #run_btn,
+html:not(.anim-ready) #clear_btn,
+html:not(.anim-ready) #triage,
+html:not(.anim-ready) #diagnosis,
+html:not(.anim-ready) #care_plan,
+html:not(.anim-ready) #reasoning,
+html:not(.anim-ready) #footer {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+}
+
+html:not(.anim-ready) .hero-rule {
+    opacity: 0;
+}
+
 /* Hero - top-down reveal */
-.hero         { animation: fadeSlideDown 0.6s  cubic-bezier(0.16,1,0.3,1) 0.05s both; }
-.hero-eyebrow { animation: fadeSlideDown 0.5s  cubic-bezier(0.16,1,0.3,1) 0.20s both; }
-.hero-title   { animation: fadeSlideDown 0.55s cubic-bezier(0.16,1,0.3,1) 0.32s both; }
-.hero-rule    { animation: fadeIn        0.4s  ease                        0.46s both; }
-.hero-sub     { animation: fadeSlideDown 0.5s  cubic-bezier(0.16,1,0.3,1) 0.54s both; }
+html.anim-ready #hero         { animation: fadeSlideDown 0.6s  cubic-bezier(0.16,1,0.3,1) 0.05s both; }
+html.anim-ready .hero-eyebrow { animation: fadeSlideDown 0.5s  cubic-bezier(0.16,1,0.3,1) 0.20s both; }
+html.anim-ready .hero-title   { animation: fadeSlideDown 0.55s cubic-bezier(0.16,1,0.3,1) 0.32s both; }
+html.anim-ready .hero-rule    { animation: fadeIn        0.4s  ease                        0.46s both; }
+html.anim-ready .hero-sub     { animation: fadeSlideDown 0.5s  cubic-bezier(0.16,1,0.3,1) 0.54s both; }
 
-/* Cards */
-.equal-cols > div:first-child { animation: fadeSlideUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.60s both; }
-.equal-cols > div:last-child  { animation: fadeSlideUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.75s both; }
+/* Cards and fields */
+html.anim-ready #layout-row   { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 0.58s both; }
+html.anim-ready #input-card   { animation: fadeSlideUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.64s both; }
+html.anim-ready #result-card  { animation: fadeSlideUp 0.65s cubic-bezier(0.16,1,0.3,1) 0.78s both; }
 
-/* Left card internals */
-.gradio-checkboxgroup { animation: fadeSlideUp 0.5s cubic-bezier(0.16,1,0.3,1) 0.90s both; }
-.gradio-slider        { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.02s both; }
-.gradio-radio         { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.14s both; }
-button.lg             { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.24s both; }
+html.anim-ready #symptoms     { animation: fadeSlideUp 0.5s  cubic-bezier(0.16,1,0.3,1) 0.90s both; }
+html.anim-ready #age          { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.00s both; }
+html.anim-ready #pain_scale   { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.08s both; }
+html.anim-ready #duration     { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.16s both; }
+html.anim-ready #run_btn      { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.24s both; }
+html.anim-ready #clear_btn    { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.30s both; }
 
-/* Right card internals */
-.triage-box               { animation: fadeSlideUp 0.5s  cubic-bezier(0.16,1,0.3,1) 0.84s both; }
-.out-block:nth-of-type(1) { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 0.96s both; }
-.out-block:nth-of-type(2) { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.08s both; }
-.out-block:nth-of-type(3) { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.20s both; }
+html.anim-ready #triage       { animation: fadeSlideUp 0.50s cubic-bezier(0.16,1,0.3,1) 0.92s both; }
+html.anim-ready #diagnosis    { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.02s both; }
+html.anim-ready #care_plan    { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.12s both; }
+html.anim-ready #reasoning    { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 1.22s both; }
 
 /* Footer */
-.footer { animation: fadeIn 0.5s ease 1.35s both; }
+html.anim-ready #footer       { animation: fadeIn 0.5s ease 1.35s both; }
 
 /* Result flash on each diagnosis run */
 @keyframes resultPop {
