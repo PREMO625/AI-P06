@@ -3,6 +3,7 @@
 import gradio as gr
 from fastapi import FastAPI
 from backend import HospitalExpertSystem
+from embedded_css import CUSTOM_CSS
 
 engine = HospitalExpertSystem()
 
@@ -16,9 +17,9 @@ if _css_file.exists():
     custom_css = _css_file.read_text(encoding="utf-8")
     print(f"CSS loaded from: {_css_file} ({len(custom_css)} chars)")
 else:
-    # Hard fallback: CSS could not be found at all
-    custom_css = ""
-    print("WARNING: style.css not found next to app.py")
+    # Fallback to embedded CSS so serverless packaging cannot break styling.
+    custom_css = CUSTOM_CSS
+    print(f"WARNING: style.css not found next to app.py; using embedded CSS ({len(custom_css)} chars)")
 
 with gr.Blocks(
     title="Hospital & Medical Facilities Expert System",
