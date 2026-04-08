@@ -1,4 +1,5 @@
 ﻿from pathlib import Path
+import os
 
 import gradio as gr
 from fastapi import FastAPI
@@ -10,9 +11,23 @@ def run_expert_system(symptoms, age, pain_scale, duration):
     result = engine.evaluate(set(symptoms), int(age), int(pain_scale), duration)
     return result["triage"], result["diagnosis"], result["care_plan"], result["reasoning"]
 
-# Load custom stylesheet from file for reliable deployment behavior.
+print("==== DEBUG START ====")
+print("Current working dir:", os.getcwd())
+print("Files in cwd:", os.listdir())
+
 _css_file = Path(__file__).with_name("style.css")
-custom_css = _css_file.read_text(encoding="utf-8") if _css_file.exists() else ""
+
+print("Resolved CSS path:", _css_file)
+print("CSS exists?:", _css_file.exists())
+
+if _css_file.exists():
+    custom_css = _css_file.read_text(encoding="utf-8")
+    print("CSS loaded. Length:", len(custom_css))
+else:
+    custom_css = ""
+    print("CSS NOT FOUND")
+
+print("==== DEBUG END ====")
 
 with gr.Blocks(
     title="Hospital & Medical Facilities Expert System",
