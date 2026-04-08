@@ -15,16 +15,27 @@ print("==== DEBUG START ====")
 print("Current working dir:", os.getcwd())
 print("Files in cwd:", os.listdir())
 
-_css_file = Path(__file__).with_name("style.css")
+_candidate_css_paths = [
+    Path(__file__).with_name("style.css"),
+    Path.cwd() / "style.css",
+    Path.cwd() / "II_Hospitals_and_Medical_Facilities" / "style.css",
+]
 
-print("Resolved CSS path:", _css_file)
-print("CSS exists?:", _css_file.exists())
+custom_css = ""
+_loaded_from = None
 
-if _css_file.exists():
-    custom_css = _css_file.read_text(encoding="utf-8")
+for _css_file in _candidate_css_paths:
+    print("Checking CSS path:", _css_file)
+    print("Exists?:", _css_file.exists())
+    if _css_file.exists():
+        custom_css = _css_file.read_text(encoding="utf-8")
+        _loaded_from = _css_file
+        break
+
+if _loaded_from is not None:
+    print("CSS loaded from:", _loaded_from)
     print("CSS loaded. Length:", len(custom_css))
 else:
-    custom_css = ""
     print("CSS NOT FOUND")
 
 print("==== DEBUG END ====")
