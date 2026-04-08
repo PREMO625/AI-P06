@@ -32,10 +32,11 @@ with gr.Blocks(
         neutral_hue=gr.themes.colors.slate,
     ),
 ) as demo:
+    gr.HTML(f"<style>{custom_css}</style>")
 
     # -- Hero --
     gr.HTML("""
-    <div class="hero">
+    <div id="hero" class="hero">
       <div class="hero-inner">
         <div class="hero-eyebrow">
           <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -54,10 +55,10 @@ with gr.Blocks(
     """)
 
     # -- Equal Two-Column Layout --
-    with gr.Row(elem_classes=["equal-cols"], equal_height=False):
+    with gr.Row(elem_classes=["equal-cols"], elem_id="layout-row", equal_height=False):
 
         # LEFT - Patient Input
-        with gr.Column(scale=1, elem_classes=["card"]):
+        with gr.Column(scale=1, elem_classes=["card"], elem_id="input-card"):
             gr.HTML("""
             <div class="card-eyebrow">Step 01</div>
             <div class="card-title">Patient Information</div>
@@ -67,28 +68,31 @@ with gr.Blocks(
                 label="Observed Symptoms",
                 choices=engine.list_symptoms(),
                 info="Select all symptoms currently present.",
+                elem_id="symptoms",
             )
 
-            age = gr.Slider(1, 100, value=30, step=1, label="Patient Age")
-            pain_scale = gr.Slider(0, 10, value=3, step=1, label="Pain Level  (0 = None - 10 = Severe)")
+            age = gr.Slider(1, 100, value=30, step=1, label="Patient Age", elem_id="age")
+            pain_scale = gr.Slider(0, 10, value=3, step=1, label="Pain Level  (0 = None - 10 = Severe)", elem_id="pain_scale")
 
             duration = gr.Radio(
                 choices=["< 24 hours", "1-2 days", "3-7 days", "> 1 week"],
                 value="1-2 days",
                 label="Duration of Symptoms",
+                elem_id="duration",
             )
 
             with gr.Row():
-                diagnose_btn = gr.Button("Run Expert Diagnosis", variant="primary", size="lg")
+                diagnose_btn = gr.Button("Run Expert Diagnosis", variant="primary", size="lg", elem_id="run_btn")
                 clear_btn = gr.ClearButton(
                     [symptoms, age, pain_scale, duration],
                     value="Clear All",
                     variant="secondary",
                     size="lg",
+                    elem_id="clear_btn",
                 )
 
         # RIGHT - Clinical Results
-        with gr.Column(scale=1, elem_classes=["card"]):
+        with gr.Column(scale=1, elem_classes=["card"], elem_id="result-card"):
             gr.HTML("""
             <div class="card-eyebrow">Step 02</div>
             <div class="card-title">Clinical Results</div>
@@ -100,26 +104,30 @@ with gr.Blocks(
                 lines=1,
                 interactive=False,
                 elem_classes=["triage-box"],
+                elem_id="triage",
             )
 
             diagnosis = gr.Markdown(
                 label="Most Probable Conditions",
                 value="",
                 elem_classes=["out-block"],
+                elem_id="diagnosis",
             )
             care_plan = gr.Markdown(
                 label="Recommended Care Plan",
                 value="",
                 elem_classes=["out-block"],
+                elem_id="care_plan",
             )
             reasoning = gr.Markdown(
                 label="Inference Reasoning",
                 value="",
                 elem_classes=["out-block"],
+                elem_id="reasoning",
             )
 
     gr.HTML("""
-    <div class="footer">
+    <div id="footer" class="footer">
         Developed by <strong>SN</strong> &nbsp;-&nbsp;
         For educational &amp; demonstration use only &nbsp;-&nbsp;
         Not a substitute for professional medical advice

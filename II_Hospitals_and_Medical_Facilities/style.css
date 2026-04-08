@@ -646,5 +646,66 @@ button.lg             { animation: fadeSlideUp 0.45s cubic-bezier(0.16,1,0.3,1) 
     will-change: opacity, transform !important;
 }
 
+/* =============================================
+   STABLE ID-BASED FALLBACKS (GRADIO 5+ SAFE)
+   ============================================= */
+
+#hero {
+    background: linear-gradient(160deg, var(--green-900) 0%, var(--green-700) 55%, var(--green-500) 100%) !important;
+}
+
+#layout-row {
+    max-width: 1240px !important;
+    margin: 0 auto !important;
+    padding: 36px 24px 0 !important;
+    gap: 24px !important;
+}
+
+#input-card,
+#result-card {
+    background: var(--white) !important;
+    border: 1px solid var(--gray-200) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 4px 20px rgba(15,45,34,0.09) !important;
+    padding: 30px 24px !important;
+}
+
+#run_btn button {
+    background: linear-gradient(135deg, var(--green-900) 0%, var(--green-500) 100%) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 999px !important;
+}
+
+#clear_btn button {
+    background: #fff !important;
+    color: var(--gray-700) !important;
+    border: 1.5px solid var(--gray-200) !important;
+    border-radius: 999px !important;
+}
+
+#symptoms label,
+#duration label {
+    border-radius: 999px !important;
+}
+
+#triage textarea {
+    background: var(--green-100) !important;
+    border: 2px solid var(--green-400) !important;
+    color: var(--green-900) !important;
+}
+
+#diagnosis,
+#care_plan,
+#reasoning {
+    border: 1px solid var(--gray-200) !important;
+    border-radius: 14px !important;
+    background: #fff !important;
+}
+
+#footer {
+    border-top: 1px solid var(--gray-200) !important;
+}
+
 
 
